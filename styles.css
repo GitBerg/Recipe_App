@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: linear;
+    background: linear-gradient(0deg, #b8b8b8, #ebebeb);
+}
+
+.container-mobile {
+    width: 390px;
+    /* height: 700px; */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+}
+
+.container-mobile .search {
+    display: flex;
+    align-items: center;
+}
+
+.container-mobile .search input {
+    padding: 10px 20px;
+    width: 70%;
+    outline: none;
+    font-size: 0.8rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.container-mobile .search i {
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    position: relative;
+    padding: 9.5px;
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.container-mobile .favorites-meals {
+    display: flex;
+    width: 100%;
+    max-height: 212px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow-x: none;
+    overflow-y: scroll;
+    padding: 5px 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+    background-color: rgb(255, 217, 255);
+    justify-content: center;
+}
+
+.container-mobile .favorites-meals .favorite-header {
+    margin-bottom: 9px;
+}
+
+.container-mobile .favorites-meals .favorite-header h2{
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+.container-mobile .favorites-meals .favorite-body {
+    width: 100%;
+}
+
+.container-mobile .favorites-meals .favorite-body ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 10px 0;
+}
+
+.container-mobile .favorites-meals .favorite-body ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    text-align: center;
+    width: 75px;
+    height: 75px;
+}
+
+.container-mobile .favorites-meals .favorite-body ul li img {
+    width: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.container-mobile .favorites-meals .favorite-body ul li p {
+    display: flex;
+    font-size: 0.6rem;
+}
+
+.container-mobile .random-meals, 
+.list-meals
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    white-space: nowrap;
+}
+
+span {
+    display: block;
+    width: 35%;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+span:hover{
+    transform: scale(1.1);
+}
+
+.container-mobile .random-meals .random-meal,
+.meal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 300px;
+    margin: 15px 0px;
+    border-radius: 4px;
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
+}
+
+.container-mobile .random-meals .random-meal-img,
+.meal-img {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+
+}
+
+.container-mobile .random-meals .random-meal-img img,
+.meal img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    cursor: pointer;
+}
+
+.container-mobile .random-meals .random-meal-description,
+.meal-description{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px;
+}
+
+.container-mobile .random-meals .random-meal-description h3,
+.meal-description h3{
+    display: flex;
+    font-size: 1rem;
+    overflow: hidden;
+    width: 205px;
+}
+
+.container-mobile .random-meals .random-meal-description i,
+.meal-description i{
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.container-mobile .random-meals .random-meal-description i:hover,
+.meal-description i:hover{
+    transform: scale(1.3);
+    color: red;
+}
