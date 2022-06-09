@@ -8,7 +8,8 @@ const popup = document.querySelector('.popup')
 const closePopupBtn = document.querySelector('#popup-close')
 const myLocalStorage = localStorage;
 
-const mealsLS = []
+let mealsLS = []
+let newArr = []
 
 let randoMealFlag = true
 
@@ -43,6 +44,8 @@ const searchMeal = async () => {
     let listMealsEl = document.createElement('div')
     listMealsEl.classList.add('list-meals')
 
+    myLocalStorage.setItem('Search-Recipe', addMealsLS(meals,'Search-Recipe'))
+
     listMeals.innerText = ""
     randomMealsList.innerText = ""
 
@@ -54,6 +57,8 @@ const searchMeal = async () => {
 const randomMeal = async () => {
     const listMeals = document.querySelector('.list-meals')
     const { meals } = await getRandomMealApi();
+
+    myLocalStorage.setItem('Random-Recipe', addMealsLS(meals,'Random-Recipe'))
 
     listMeals.innerText = ""
     randomMealsList.innerText = ""
@@ -67,13 +72,10 @@ const likeMeal = async (event, card) => {
         let pEl = document.createElement('p')
         let li = document.createElement('li')
 
-       
-       
-
         let meal = event.target.parentNode.children[0].textContent;
         const { meals } = await getMealsApi(meal)
-        
-        addMealsLS(meals)
+    
+        myLocalStorage.setItem('Like-Recipe', addMealsLS(meals))
 
         imgEl.src = meals[0]['strMealThumb']
         imgEl.classList.add('fav-img')
@@ -86,16 +88,15 @@ const likeMeal = async (event, card) => {
     }
 }
 
-const showMeal = async (meal) => {
+const showMeal = async (meal, type) => {
     const containerMobile = document.querySelector('.container-mobile')
     const title = document.querySelector('#popup-title')
     const img = document.querySelector('#popup-img')
     const desc = document.querySelector('#popup-desc')
     popup.classList.add('activate')
     containerMobile.classList.add('blur')
-    // const { meals } = await getMealsApi(meal)
-    doidera = myLocalStorage.getItem('Like-Recipe')
-    let text = JSON.parse(doidera)
+    let text = JSON.parse(myLocalStorage.getItem(`${type}`))
+    // console.log(text);
     text.forEach(e => {
         if(e[0]['strMeal'] === meal)
         {img.src = e[0]['strMealThumb']
@@ -108,7 +109,7 @@ const showMeal = async (meal) => {
 randomMealsList.addEventListener('click', (event) => {
     if (event.target.parentNode.className === "random-meal-img") {
         const meal = event.target.parentNode.parentNode.children[1].children[0].textContent;
-        showMeal(meal)
+        showMeal(meal,'Random-Recipe')
     }
     likeMeal(event, 'random')
 })
@@ -116,7 +117,7 @@ randomMealsList.addEventListener('click', (event) => {
 listMeals.addEventListener('click', (event) => {
     if (event.target.parentNode.className === "meal-img") {
         const meal = event.target.parentNode.parentNode.children[1].children[0].textContent;
-        showMeal(meal)
+        showMeal(meal,'Search-Recipe')
     }
     likeMeal(event, 'meal')
 })
@@ -128,7 +129,7 @@ searchBtn.addEventListener('click', searchMeal)
 favoriteList.addEventListener('click', async (event) => {
     if (event.target.className === "fav-img") {
         const meal = event.target.nextSibling.textContent;
-        showMeal(meal)
+        showMeal(meal,'Like-Recipe')
     }
 })
 
@@ -139,14 +140,13 @@ closePopupBtn.addEventListener('click', () => {
 })
 
 const addMealsLS = (meal) =>{
-    // myLocalStorage.removeItem('Recipe')
     mealsLS.push(meal)
-    newArr = [...mealsLS]
-    myLocalStorage.setItem('Like-Recipe', [JSON.stringify(newArr)])
-    // doidera = myLocalStorage.getItem('Like-Recipe')
-    // let text = JSON.parse(doidera)
-    // console.log(text)
-   
+    newArr = [...mealsLS, meal]
+    console.log(newArr);
+    // text = JSON.stringify(newArr);
+    // newAr = [...JSON.parse(text)]
+    // console.log(...newAr);
+    return JSON.stringify(newArr)
 }
 
 const removeMealsLS = () =>{
@@ -158,17 +158,7 @@ const removeMealsLS = () =>{
 const getMealsApi = async (value) => {
     try {
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`)
-        const meal =  await response.json()
-        // const {meals} = meal
-        // console.log(meals);
-        // myLocalStorage.setItem('Recipe-Name', [])
-        // myLocalStorage.setItem('Recipe-Img', [])
-        // meals.forEach(e => {
-        //     myLocalStorage.getItem('Recipe-Img');
-        //     console.log(e['strMealThumb']);
-        // })
-        // console.log(myLocalStorage.getItem('Recipe-Img'));
-        return meal
+        return await response.json()
     } catch (error) {
         console.log(error);
     }
