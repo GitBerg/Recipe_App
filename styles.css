@@ -90,18 +90,21 @@ div.container-mobile.blur{
     display: flex;
     list-style: none;
     flex-wrap: wrap;
-    gap: 10px 0;
+    gap: 0 3px;
 }
 
 .container-mobile .favorites-meals .favorite-body ul li {
     display: flex;
+    position: relative;
+    bottom: 10px;
     flex-direction: column;
+    overflow: hidden;
     align-items: center;
     flex-wrap: nowrap;
-    overflow: hidden;
     text-align: center;
     width: 75px;
-    height: 75px;
+    height: 95px;
+    
 }
 
 .container-mobile .favorites-meals .favorite-body ul li img {
@@ -254,5 +257,36 @@ div.popup .popup-infos .popup-img #popup-img{
 div.popup .popup-infos .popup-desc #popup-desc{
     font-size: 0.8em;
  }
+ 
+ .liked{
+     pointer-events: none;
+ }
+ li i#close{
+    position: absolute;
+    z-index: 10;
+    transform: translate(25px, -5px);
+    opacity: 0;
+ }
 
+ li i#close{
+    position: sticky;
+    z-index: 10;
+    transform: translate(25px, 5px);
+    opacity: 0;
+    cursor: pointer;
+    transition: 0.5s;
+ }
 
+ .container-mobile .favorites-meals .favorite-body ul li:hover > i#close{
+     opacity: 1;
+ }
+
+ .popup-ingred h3,
+ .popup-desc h3 {
+    text-align: center;
+    padding-bottom: 10px;
+ }
+
+ .popup-ingred {
+    padding-top: 10px;
+ }
