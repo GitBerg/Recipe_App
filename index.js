@@ -63,6 +63,7 @@ const searchMeal = async () => {
     convertedSearch.forEach(element => {
         buildMeal(element, listMeals, 'meal')
     });
+
 }
 
 const randomMeal = async () => {
@@ -96,25 +97,28 @@ const likeMeal = async (event, card) => {
         let meal = event.target.parentNode.children[0].textContent;
         const { meals } = await getMealsApi(meal)
 
-        lMealsLS = [...lMealsLS, ...meals].filter(el => {
+        lMealsLS = [...lMealsLS, meals[0]].filter(el => {
             setMealsLike.add(el['idMeal'])
             return true
         })
 
         myLocalStorage.setItem('Like-Recipe', JSON.stringify(lMealsLS))
 
-        buildFavList(meals)
+        buildFavList(lMealsLS)
 
         if (card === 'random') {
             randomMeal()
         } else {
             searchMeal()
         }
+
+        console.log(lMealsLS);
     }
 }
 
 
 const buildFavList = (meals) => {
+    favoriteList.innerText = '';
     meals.forEach(meal => {
         let imgEl = document.createElement('img')
         let pEl = document.createElement('p')
